@@ -180,14 +180,11 @@ class DocSim: #defining the class
         if not filler_words is None and len(filler_words) > 0:
             ngram_fillers = [x for x in filler_words if " " in x]
 
-        # print(filler_words)
-
         # Stem words by cutting off at the root of the word
         if stem:
             if filler_words == None:
                 filler_words = [filler_words]
-            # Tokenize
-            # text = text.apply(lambda x: nltk.tokenize.casual.casual_tokenize(x)) 
+            # Tokenize 
             text = text.apply(lambda x: nltk.tokenize.word_tokenize(x)) 
 
             # Set up the stemmer and apply stemming
@@ -205,7 +202,6 @@ class DocSim: #defining the class
             if filler_words == None:
                 filler_words = [filler_words]
             
-            # text = text.apply(lambda x: nltk.tokenize.casual.casual_tokenize(x)) 
             text = text.apply(lambda x: nltk.tokenize.word_tokenize(x)) 
 
             # Set up the lemmatizer and apply
@@ -247,10 +243,6 @@ class DocSim: #defining the class
             # Handle different level of TF-IDF
             if tfidf_level == 'full':
                 # Tfidf Vectorizer
-                # vectorizer = sklearn.feature_extraction.text.\
-                #     TfidfVectorizer(lowercase = True, 
-                #         stop_words = filler_words,
-                #         ngram_range = (1, ngram))
                 vectorizer = sklearn.feature_extraction.text.\
                     TfidfVectorizer(**tf_params)
                 vectors = vectorizer.fit_transform(text.tolist())
